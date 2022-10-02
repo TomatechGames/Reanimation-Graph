@@ -2,7 +2,7 @@
   "name": "com.tomatech.reanimationgraph",
   "version": "0.1.0",
   "displayName": "Reanimation Graph",
-  "description": "A basic Graph View editor to generate Reanimation node trees\nTo get the Reanimation package, see https://github.com/aarthificial/reanimation",
+  "description": "A basic Graph View editor to generate Reanimation node trees\nTo get the Reanimation package, see https://github.com/aarthificial/reanimation \nThis should be the developer branch",
   "unity": "2021.3",
   "dependencies": {
     "com.aarthificial.reanimation": "0.0.2"
