@@ -1,0 +1,16 @@
+{
+    "name": "Unity.ReanimationGraph",
+    "rootNamespace": "Tomatech.ReanimationGraph",
+    "references": [
+        "GUID:199ea8ef61cbfd04981549e94d6043c2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
