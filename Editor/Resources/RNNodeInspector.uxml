@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor%20Default%20Resources/ReanimatorNodeEditor/RNGraphViewStyles.uss?fileID=7433441132597879392&amp;guid=e47e10e6507fe9e42b3909e8adddfb19&amp;type=3#RNGraphViewStyles" />
+    <ui:VisualElement name="inspector" class="node-inspector-bg" style="border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; right: 0; top: 0; position: absolute; width: auto; height: auto; left: 0; bottom: 0;">
+        <ui:VisualElement name="content" style="top: 0; width: 100%; align-items: stretch; flex-shrink: 1;">
+            <ui:VisualElement name="header" class="node-inspector-header">
+                <ui:Label tabindex="-1" text="Node Inspector" display-tooltip-when-elided="true" name="titleLabel" class="node-inspector-title" />
+                <ui:Label tabindex="-1" text="Animation Node" display-tooltip-when-elided="true" name="subTitleLabel" class="node-inspector-subtitle" />
+            </ui:VisualElement>
+            <ui:ScrollView horizontal-scroller-visibility="Hidden" name="contentScrollView" style="margin-top: 5px;">
+                <ui:VisualElement name="contentContainer" />
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

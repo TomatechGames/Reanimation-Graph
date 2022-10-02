@@ -1,0 +1,8 @@
+:root
+{
+	--rn-colors-grid-light-grey-1: #2b2b2b;
+	--rn-colors-grid-light-grey-2: rgba(51, 51, 51, 0.4);
+	--rn-colors-grid-light-grey-3: rgba(51, 51, 51, 1);
+
+	--rn-metrics-grid-25: 25;
+}

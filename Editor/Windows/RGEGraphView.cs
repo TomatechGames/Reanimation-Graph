@@ -16,7 +16,6 @@ namespace Tomatech.ReanimationGraph.RGEditor
 
     public class RGEGraphView : GraphView
     {
-        internal static readonly string StyleSheetPath = "ReanimatorNodeEditor/RNGraphViewStyles.uss";
 
         public RGEEditorWindow editorWindow;
         Dictionary<string, RGENodeBase> registeredNodes = new();
@@ -34,7 +33,7 @@ namespace Tomatech.ReanimationGraph.RGEditor
             this.editorWindow = editorWindow;
             AddManipulators();
             AddGridBackground();
-            styleSheets.Add(EditorGUIUtility.Load(StyleSheetPath) as StyleSheet);
+            styleSheets.Add(Resources.Load<StyleSheet>("RNGraphViewStyles")); 
             AddBlackboardAndInspector();
             ElementsDeletedCallback();
             graphViewChanged = OnGraphChange;

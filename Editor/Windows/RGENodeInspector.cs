@@ -70,8 +70,7 @@ namespace Tomatech.ReanimationGraph.RGEditor
 
         public RGENodeInspector(GraphView associatedGraphView = null)
         {
-
-            VisualTreeAsset visualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor Default Resources/ReanimatorNodeEditor/RNNodeInspector.uxml");
+            VisualTreeAsset visualTreeAsset = Resources.Load<VisualTreeAsset>("RNNodeInspector"); 
             m_MainContainer = visualTreeAsset.Instantiate();
             m_MainContainer.AddToClassList("mainContainer");
             m_Root = m_MainContainer.Q("content");

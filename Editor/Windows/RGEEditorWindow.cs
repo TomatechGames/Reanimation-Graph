@@ -10,7 +10,7 @@ namespace Tomatech.ReanimationGraph.RGEditor
         [MenuItem("Window/Tomatech/Reanimation Node Editor")]
         public static void ShowExample()
         {
-            GetWindow<RGEEditorWindow>();
+            GetWindow<RGEEditorWindow>("Reanimation Node Editor");
         }
 
         [OnOpenAsset]
@@ -19,16 +19,17 @@ namespace Tomatech.ReanimationGraph.RGEditor
         {
             if(EditorUtility.InstanceIDToObject(instanceID) is RGEGraphContainer)
             {
-                bool windowIsOpen = HasOpenInstances<RGEEditorWindow>();
-                if (!windowIsOpen)
-                {
-                    CreateWindow<RGEEditorWindow>();
-                }
-                else
-                {
-                    FocusWindowIfItsOpen<RGEEditorWindow>();
-                }
-            }
+                GetWindow<RGEEditorWindow>("Reanimation Node Editor");
+                //bool windowIsOpen = HasOpenInstances<RGEEditorWindow>();
+                //if (!windowIsOpen)
+                //{
+                //    CreateWindow<RGEEditorWindow>();
+                //}
+                //else
+                //{
+                //    FocusWindowIfItsOpen<RGEEditorWindow>();
+                //}
+            } 
             return false;
         }
 
@@ -38,10 +39,9 @@ namespace Tomatech.ReanimationGraph.RGEditor
 
         public void CreateGUI()
         {
-            position = new Rect(position.position, new Vector2(1200, 700));
             AddGraphView();
-            AddStyles();
-            TrySetTarget(Selection.activeObject);
+            rootVisualElement.styleSheets.Add(Resources.Load<StyleSheet>("RNVariables"));
+            TrySetTarget(Selection.activeObject); 
         }
 
         void AddGraphView()
@@ -49,13 +49,6 @@ namespace Tomatech.ReanimationGraph.RGEditor
             graphView = new(this);
             rootVisualElement.Add(graphView);
             graphView.StretchToParentSize();
-        }
-
-        private void AddStyles()
-        {
-            StyleSheet stylesheet = EditorGUIUtility.Load("ReanimatorNodeEditor/RNVariables.uss") as StyleSheet;
-
-            rootVisualElement.styleSheets.Add(stylesheet);
         }
 
         private void OnSelectionChange()
