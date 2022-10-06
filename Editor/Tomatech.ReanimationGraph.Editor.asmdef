@@ -1,5 +1,5 @@
 {
-    "name": "Unity.ReanimationGraph.Editor",
+    "name": "Tomatech.ReanimationGraph.Editor",
     "rootNamespace": "Tomatech.ReanimationGraph.Editor",
     "references": [
         "GUID:823e923624be59a448c1b1dd5287c4ea",
