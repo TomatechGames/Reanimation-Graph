@@ -79,7 +79,7 @@ namespace Tomatech.ReanimationGraph.RGEditor.Elements
         protected void Rename(string newName)
         {
             string oldName = NodeName;
-            NodeName = newName;
+            NodeName = newName; 
             graphView.ApplyRenamedNode(oldName);
         }
 
@@ -90,12 +90,20 @@ namespace Tomatech.ReanimationGraph.RGEditor.Elements
 
         public void ApplyNameToAsset()
         {
-            string[] labels = AssetDatabase.GetLabels(LinkedReanimNode);
-            AssetDatabase.ClearLabels(LinkedReanimNode);
-            LinkedReanimNode.name = NodeName;
-            AssetDatabase.SetLabels(LinkedReanimNode, new string[] { NodeName });
-            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(LinkedReanimNode));
-            AssetDatabase.ClearLabels(LinkedReanimNode);
+            //string[] labels = AssetDatabase.GetLabels(LinkedReanimNode);
+            //AssetDatabase.ClearLabels(LinkedReanimNode);
+            LinkedReanimNode.name = NodeName; 
+            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(LinkedReanimNode), ImportAssetOptions.ForceUpdate);
+            //AssetDatabase.SetLabels(LinkedReanimNode, new string[] { NodeName });
+            //AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(LinkedReanimNode));
+            //AssetDatabase.ClearLabels(LinkedReanimNode);
+            ForceUpdateProjectWindows();
+        }
+        private static void ForceUpdateProjectWindows()
+        {
+            string tempAssetPath = "Assets/temp-987654321.anim";
+            AssetDatabase.CreateAsset(new AnimationClip(), tempAssetPath);
+            AssetDatabase.DeleteAsset(tempAssetPath);
         }
 
         public virtual void Draw()
