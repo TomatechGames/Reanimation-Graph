@@ -27,6 +27,13 @@ namespace Tomatech.ReanimationGraph
             }
         }
 
+        private void OnValidate()
+        {
+#if UNITY_EDITOR
+            OnEnable();
+#endif
+        }
+
         public override TerminationNode Resolve(IReadOnlyReanimatorState previousState, ReanimatorState nextState)
         {
             AddTrace(nextState);
