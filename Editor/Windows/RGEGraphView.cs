@@ -6,7 +6,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UIElements;
 
-namespace Tomatech.ReanimationGraph.RGEditor
+namespace Tomatech.ReanimationGraph.Editor
 {
     using Aarthificial.Reanimation.Cels;
     using Aarthificial.Reanimation.Nodes;
@@ -74,20 +74,28 @@ namespace Tomatech.ReanimationGraph.RGEditor
                 }
             }
 
+            List<TokenNode> driversToUpdate = new();
             foreach (var item in editorWindow.Target.DriverData)
             {
                 TokenNode driverNode = CreateDriverToken(item.name, item.guid, item.position);
                 foreach (var connectorNode in item.connectionNames)
                 {
+                    if (!registeredNodes.ContainsKey(connectorNode))
+                    {
+                        Debug.LogWarning($"due to a previous internal naming error, a \"{item.name}\" driver instance failed to find a node named \"{connectorNode}\"");
+                        driversToUpdate.Add(driverNode);
+                        continue;
+                    }
                     RGENodeBase rgeNodeBase = registeredNodes[connectorNode];
                     if (rgeNodeBase.ControlDriversMatch(item.name))
                     {
                         AddElement(driverNode.output.ConnectTo(rgeNodeBase.ControlDriverPort));
                     }
-                    
                 }
                 AddElement(driverNode);
             }
+            foreach (var item in driversToUpdate)
+                editorWindow.Target.CreateOrUpdateDriver(CreateTokenData(item));
 
             foreach (var item in registeredNodes.Values.Where(n=>n is RGESwitchNode))
             {
@@ -153,25 +161,25 @@ namespace Tomatech.ReanimationGraph.RGEditor
                     }
                 }
             if(change.movedElements!=null)
+                
                 foreach (var item in change.movedElements)
                 {
                     if (item == rootNode)
                     {
                         editorWindow.Target.rootPos = NodePosition(rootNode);
-                        break;
+                        continue;
                     }
                     if (item is RGENodeBase rgeNodeItem)
                     {
                         editorWindow.Target.CreateOrUpdateNode(rgeNodeItem);
-                        break;
+                        continue;
                     }
-                    if(item is TokenNode rgeTokenItem)
+                    if (item is TokenNode rgeTokenItem)
                     {
                         editorWindow.Target.CreateOrUpdateDriver(CreateTokenData(rgeTokenItem));
-                        break;
+                        continue;
                     }
                 }
-
             return change;
         }
 
@@ -387,6 +395,12 @@ namespace Tomatech.ReanimationGraph.RGEditor
         {
             T node = new();
             node.Initialize(pos, this, existingNode);
+            if (registeredNodes.ContainsKey(node.NodeName))
+            {
+                Debug.LogWarning("name duplicate found, attempting to assign new name");
+                node.NodeName = IncrementName(node.NodeName, registeredNodes.Keys.ToList());
+                node.ApplyNameToAsset();
+            }
             registeredNodes.Add(node.NodeName, node);
             node.Draw();
             node.RefreshExpandedState();
@@ -519,7 +533,7 @@ namespace Tomatech.ReanimationGraph.RGEditor
             }
             foreach (var item in edgesToDelete)
             {
-                if (item?.input.portType == typeof(bool))
+                if (item?.input?.portType == typeof(bool))
                 {
                     if (item.output.node == rootNode)
                     {
@@ -531,7 +545,7 @@ namespace Tomatech.ReanimationGraph.RGEditor
                         switchNode?.RemoveReferenceFromPortIndex(item.output);
                     }
                 }
-                if (item?.input.portType == typeof(int))
+                if (item?.input?.portType == typeof(int))
                 {
                     RGENodeBase rgeNode = item.input.node as RGENodeBase;
                     rgeNode.SetControlDriverName("");

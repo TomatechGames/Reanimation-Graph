@@ -3,7 +3,7 @@ using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Tomatech.ReanimationGraph.RGEditor
+namespace Tomatech.ReanimationGraph.Editor
 {
     public class RGEEditorWindow : EditorWindow
     {
