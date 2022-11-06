@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-namespace Tomatech.ReanimationGraph.RGEditor
+namespace Tomatech.ReanimationGraph.Editor
 {
     public class RGENodeInspector : GraphElement
     {
@@ -54,7 +54,7 @@ namespace Tomatech.ReanimationGraph.RGEditor
             }
         }
 
-        public void SetEditor(Editor customEditor)
+        public void SetEditor(UnityEditor.Editor customEditor)
         {
             if (customEditor)
             {

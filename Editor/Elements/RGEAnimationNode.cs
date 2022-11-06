@@ -2,11 +2,11 @@ using Aarthificial.Reanimation.Cels;
 using Aarthificial.Reanimation.Nodes;
 using System.Collections;
 using System.Collections.Generic;
-using Tomatech.ReanimationGraph.RGEditor.Inspectors;
+using Tomatech.ReanimationGraph.Editor.Inspectors;
 using UnityEditor;
 using UnityEngine;
 
-namespace Tomatech.ReanimationGraph.RGEditor.Elements
+namespace Tomatech.ReanimationGraph.Editor.Elements
 {
     public class RGEAnimationNode<TNode, TCel> : RGENodeBase 
         where TCel : ICel
@@ -22,7 +22,7 @@ namespace Tomatech.ReanimationGraph.RGEditor.Elements
                 linkedNode = existingNode as TNode;
             else
                 linkedNode = ScriptableObject.CreateInstance<TNode>();
-            NodeInspector = Editor.CreateEditor(linkedNode, typeof(RGEAnimationNodeEditor));
+            NodeInspector = UnityEditor.Editor.CreateEditor(linkedNode, typeof(RGEAnimationNodeEditor));
         }
     }
 }

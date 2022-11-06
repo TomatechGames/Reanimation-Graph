@@ -1,10 +1,10 @@
-using Aarthificial.Reanimation;
-using Aarthificial.Reanimation.Nodes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Aarthificial.Reanimation;
+using Aarthificial.Reanimation.Nodes;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,7 +12,7 @@ using UnityEditor;
 
 namespace Tomatech.ReanimationGraph
 {
-    [CreateAssetMenu(menuName = "Tomatech/Reanimator Graph", fileName = "New Reanimator Graph")]
+    [CreateAssetMenu(menuName = "Tomatech/RGE/Graph", fileName = "New Reanimator Graph")]
     public class RGEGraphContainer : ReanimatorNode
     {
         [SerializeField]
@@ -39,6 +39,11 @@ namespace Tomatech.ReanimationGraph
         public List<DriverInstanceData> DriverData => driverData;
         public string[] DriverBlackboard => driverBlackboard;
 
+        public List<TerminationNode> GetTerminationNodes()
+        {
+            return NodeData.Select(x=>x.node).Where(x=>x is TerminationNode).Cast<TerminationNode>().ToList();
+        }
+
         public void SetRootNode(ReanimatorNode rootNode)
         {
             this.rootNode = rootNode;
@@ -62,6 +67,7 @@ namespace Tomatech.ReanimationGraph
             foreach (var item in toRemove)
             {
                 AssetDatabase.RemoveObjectFromAsset(item.node);
+                DestroyImmediate(item.node);
             }
             if (toRemove.Length>0)
             {

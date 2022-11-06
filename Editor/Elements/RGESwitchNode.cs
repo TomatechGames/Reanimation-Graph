@@ -1,13 +1,13 @@
 using Aarthificial.Reanimation.Nodes;
 using System.Collections;
 using System.Collections.Generic;
-using Tomatech.ReanimationGraph.RGEditor.Inspectors;
+using Tomatech.ReanimationGraph.Editor.Inspectors;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Tomatech.ReanimationGraph.RGEditor.Elements
+namespace Tomatech.ReanimationGraph.Editor.Elements
 {
     public class RGESwitchNode : RGENodeBase
     {
@@ -23,7 +23,7 @@ namespace Tomatech.ReanimationGraph.RGEditor.Elements
                 linkedNode = existingNode as SwitchNode;
             else
                 linkedNode = ScriptableObject.CreateInstance<SwitchNode>();
-            NodeInspector = Editor.CreateEditor(linkedNode, typeof(RGESwitchNodeEditor));
+            NodeInspector = UnityEditor.Editor.CreateEditor(linkedNode, typeof(RGESwitchNodeEditor));
             //NodeInspector = Editor.CreateEditor(linkedNode);
         }
 

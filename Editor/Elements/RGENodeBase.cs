@@ -7,13 +7,13 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Tomatech.ReanimationGraph.RGEditor.Elements
+namespace Tomatech.ReanimationGraph.Editor.Elements
 {
     public abstract class RGENodeBase : Node
     {
         public string NodeName { get; set; }
         public abstract ReanimatorNode LinkedReanimNode { get; }
-        public Editor NodeInspector { get; protected set; }
+        public UnityEditor.Editor NodeInspector { get; protected set; }
         protected Port referencePort;
         protected Port controlDriverPort;
         protected TextField nameTextField;
